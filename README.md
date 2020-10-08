@@ -6,6 +6,8 @@ a)Infrastructure Setup on MS Azure: 1 RG, 3 VMs, 3 NICs, 1 NSG, 1 VPC, 1 Subnet,
    1) terraform init
    2) terraform plan
    3) terraform apply:  Enter yes
+   
+   terraform-IAC-inaction.png
 
 b)Push the Docker images to Azure Container Registry
    login to MS Azure portal
