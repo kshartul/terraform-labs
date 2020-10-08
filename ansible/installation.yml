@@ -1,0 +1,90 @@
+- hosts: servers
+  become: yes
+  gather_facts: false
+  vars_files:
+    - group_vars/default.yml
+  tasks:
+    - name: Install aptitude using apt
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker-py
+          
+    - name: Pull currency_exchange Docker image
+      docker_image:
+        name: "{{ default_currency_exchange_image }}"
+        source: pull
+
+    - name: Pull currency_conversion Docker image
+      docker_image:
+        name: "{{ default_currency_conversion_image }}"
+        source: pull
+
+    - name: Running the currency-exchange container
+      docker_container:
+        name: "{{ default_currency_exchange_container_name }}"
+        image: "{{ default_currency_exchange_image }}"
+        command: "{{ default_container_command }}"
+        ports:
+          - "8001:8080"
+        links:
+          - "myredis:aliasedredis"
+        with_sequence: count={{ create_containers }}
+        path: docker
+        env:
+            REDIS_HOST_URL: REDIS_HOSTS
+        recreate: yes
+        state: present
+        restart: yes
+
+    - name: Running the currency-conversion container
+      docker_container:
+        name: "{{ default_currency_conversion_container_name }}"
+        image: "{{ default_currency_conversion_image }}"
+        command: "{{ default_container_command }}"
+        ports:
+          - "8002:8080"
+        links:
+          - "myredis:aliasedredis"
+        with_sequence: count={{ create_containers }}
+        path: docker
+        env:
+            REDIS_HOST_URL: REDIS_HOSTS
+        recreate: yes
+        state: present
+        restart: yes
+        
+    - name: Re-create a redis container
+      docker_container:
+        name: myredis
+        image: redis
+        command: redis-server --appendonly yes
+        state: running
+        recreate: yes
+        environment:
+          - REDIS_HOSTS=local:redis:6379
+        exposed_ports:
+        - 6379
+        volumes_from:
+        - mydata
+            
+    
+    

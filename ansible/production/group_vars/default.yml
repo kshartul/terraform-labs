@@ -1,0 +1,9 @@
+---
+    create_containers: 4  # multiple instance of micro services 
+    registry_name: acrsh01 
+    env_name: Production
+    default_currency_exchange_container_name: currency-exchange
+    default_currency_conversion_container_name: currency-conversion
+    default_currency_exchange_image: acrsh01.azurecr.io/currency-exchange:0.0.1-RELEASE
+    default_currency_conversion_image: acrsh01.azurecr.io/currency-conversion:0.0.1-RELEASE
+    default_container_command: sleep 1d
