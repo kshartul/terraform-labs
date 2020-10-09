@@ -33,8 +33,8 @@ c)Application services deployment
     output is  3 ipaddres:  ip1 , ip2, ip3  
    
   - add ip1  to the file ansible/inventories/development/hosts 
-  - add ip2  to the file ansible/inventories/development/hosts 
-  - add ip3  to the file ansible/inventories/development/hosts 
+  - add ip2  to the file ansible/inventories/production/hosts 
+  - add ip3  to the file ansible/inventories/staging/hosts 
  
    Navigate to folder ansible then execute the following command from terminal
    Command
