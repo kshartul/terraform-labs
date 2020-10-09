@@ -9,7 +9,7 @@ a)Infrastructure Setup on MS Azure: 1 RG, 3 VMs, 3 NICs, 1 NSG, 1 VPC, 1 Subnet,
    
    ![picture](https://github.com/kshartul/terraform-labs/blob/main/terraform-IAC-inaction.png)
    
-   ![picture]https://github.com/kshartul/terraform-labs/blob/main/Azure-Infrastructure-SetUp%20(2).png
+   ![picture](https://github.com/kshartul/terraform-labs/blob/main/Azure-Infrastructure-SetUp%20(2).png)
  
 
 b)Push the Docker images to Azure Container Registry
@@ -25,6 +25,8 @@ c)Application services deployment
   - az vm show --resource-group SecondRG  --name myvm-0 -d --query [publicIps] -o tsv
   - az vm show --resource-group SecondRG  --name myvm-1 -d --query [publicIps] -o tsv
   - az vm show --resource-group SecondRG  --name myvm-3 -d --query [publicIps] -o tsv
+  
+   ![picture](https://github.com/kshartul/terraform-labs/blob/main/AzureVMs-publicIPs-PowerShell.png)
   
     output is  3 ipaddres:  ip1 , ip2, ip3  
    
