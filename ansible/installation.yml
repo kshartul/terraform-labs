@@ -2,7 +2,7 @@
   become: yes
   gather_facts: false
   vars_files:
-    - group_vars/default.yml
+    - "{{ env }}/group_vars/default.yml"
   tasks:
     - name: Install aptitude using apt
       apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
