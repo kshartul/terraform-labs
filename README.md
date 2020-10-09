@@ -19,6 +19,8 @@ b)Push the Docker images to Azure Container Registry
    3) docker push myregistry.azurecr.io/currency-conversion:0.0.1-RELEASE
    4) docker push myregistry.azurecr.io/currency-exchange:0.0.1-RELEASE
 
+   ![picture](https://github.com/kshartul/terraform-labs/blob/main/2MS-DockerImages-ACR.png)
+
 c)Application services deployment
    Use  the folllwing command from PowerShell to get the ipaddress of 3 VMs
 
