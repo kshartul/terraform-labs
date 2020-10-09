@@ -1,6 +1,0 @@
-[servers]
-40.86.163.200
-
-[servers:vars]
-ansible_user=azureuser
-ansible_ssh_private_key_file= ~/.ssh/id_rsa
