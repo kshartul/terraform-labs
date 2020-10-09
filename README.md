@@ -42,6 +42,8 @@ c)Application services deployment
   - ansible-playbook -i inventories/development/hosts  installation.yml
   - ansible-playbook -i inventories/staging/hosts  installation.yml
   - ansible-playbook -i inventories/production/hosts  installation.yml
+  
+   ![picture](https://github.com/kshartul/terraform-labs/blob/main/ansible_inaction.png)
 
 
 
